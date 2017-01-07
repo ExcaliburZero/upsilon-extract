@@ -1,3 +1,9 @@
+# Author:     Dae-Won Kim
+# License:    MIT License
+# Paper:      Kim & Bailer-Jones 2015
+#             https://arxiv.org/abs/1512.01611
+# Repository: https://github.com/dwkim78/py3-upsilon
+# History:    https://github.com/dwkim78/py3-upsilon/commits/2c3e1da134014bf75fd672044f03f3b650045b10/upsilon/extract_features/is_period_alias.py
 def is_period_alias(period):
     """
     Check if a given period is possibly an alias.

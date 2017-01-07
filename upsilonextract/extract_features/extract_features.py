@@ -1,3 +1,9 @@
+# Author:     Dae-Won Kim
+# License:    MIT License
+# Paper:      Kim & Bailer-Jones 2015
+#             https://arxiv.org/abs/1512.01611
+# Repository: https://github.com/dwkim78/py3-upsilon
+# History:    https://github.com/dwkim78/py3-upsilon/commits/2c3e1da134014bf75fd672044f03f3b650045b10/upsilon/extract_features/extract_features.py
 import warnings
 import multiprocessing
 from collections import OrderedDict
