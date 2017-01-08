@@ -1,7 +1,7 @@
 # Author:     Christopher Wells
 # License:    MIT License
 from __future__ import print_function
-import extract_features as up
+import upsilonextract as up
 import numpy as np
 import sys
 
