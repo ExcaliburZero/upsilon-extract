@@ -17,11 +17,13 @@ def main():
     parser.add_argument('start', type=int, help='id number of first file to process')
     parser.add_argument('end', type=int, help='id number of last file to process')
 
+    parser.add_argument('-q', '--quiet', action='store_true', help="do not print status messages to stderr")
+
     args = parser.parse_args()
 
-    process_input_files(args.prefix, args.suffix, args.padding, args.start, args.end)
+    process_input_files(args.prefix, args.suffix, args.padding, args.start, args.end, args.quiet)
     
-def process_input_files(prefix, suffix, padding, start, end):
+def process_input_files(prefix, suffix, padding, start, end, quiet):
     for x in range(start, end + 1):
         number = ("%0" + str(padding) + "d") % (x,)
         file_path = prefix + number + suffix
@@ -43,7 +45,9 @@ def process_input_files(prefix, suffix, padding, start, end):
             features_string += str(features[key])
 
         print(features_string)
-        print_stderr(number)
+
+        if not quiet:
+            print_stderr(number)
 
 
 def parse_file(file_path):
