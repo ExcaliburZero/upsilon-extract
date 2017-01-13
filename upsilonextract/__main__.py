@@ -27,27 +27,30 @@ def process_input_files(prefix, suffix, padding, start, end, quiet):
     for x in range(start, end + 1):
         number = ("%0" + str(padding) + "d") % (x,)
         file_path = prefix + number + suffix
-        (date, mag, err) = parse_file(file_path)
-        e_features = up.ExtractFeatures(date, mag, err)
-        e_features.run()
-        features = e_features.get_features()
+        try:
+            (date, mag, err) = parse_file(file_path)
+            e_features = up.ExtractFeatures(date, mag, err)
+            e_features.run()
+            features = e_features.get_features()
+
+            print(number, end="")
+
+            features_string = ""
+            num_features = len(features)
+            i = 0
+            for key in features:
+                if i < num_features:
+                    features_string += "\t"
+                i += 1
     
-        print(number, end="")
+                features_string += str(features[key])
 
-        features_string = ""
-        num_features = len(features)
-        i = 0
-        for key in features:
-            if i < num_features:
-                features_string += "\t"
-            i += 1
+            print(features_string)
 
-            features_string += str(features[key])
-
-        print(features_string)
-
-        if not quiet:
-            print_stderr(number)
+            if not quiet:
+                print_stderr(number)
+        except IOError:
+            print_stderr("skipping %s, file not found: %s" % (number, file_path))
 
 
 def parse_file(file_path):
