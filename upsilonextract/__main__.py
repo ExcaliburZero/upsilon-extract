@@ -18,18 +18,19 @@ def main():
     parser.add_argument('end', type=int, help='id number of last file to process')
 
     parser.add_argument('-q', '--quiet', action='store_true', help="do not print status messages to stderr")
+    parser.add_argument('-n', '--number-cores', type=int, default=4, help="number of cores to use")
 
     args = parser.parse_args()
 
-    process_input_files(args.prefix, args.suffix, args.padding, args.start, args.end, args.quiet)
+    process_input_files(args.prefix, args.suffix, args.padding, args.start, args.end, args.quiet, args.number_cores)
     
-def process_input_files(prefix, suffix, padding, start, end, quiet):
+def process_input_files(prefix, suffix, padding, start, end, quiet, cores):
     for x in range(start, end + 1):
         number = ("%0" + str(padding) + "d") % (x,)
         file_path = prefix + number + suffix
         try:
             (date, mag, err) = parse_file(file_path)
-            e_features = up.ExtractFeatures(date, mag, err)
+            e_features = up.ExtractFeatures(date, mag, err, n_threads=cores)
             e_features.run()
             features = e_features.get_features()
 
